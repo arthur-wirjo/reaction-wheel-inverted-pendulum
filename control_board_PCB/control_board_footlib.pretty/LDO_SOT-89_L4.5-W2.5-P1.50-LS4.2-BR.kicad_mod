@@ -1,4 +1,4 @@
-(footprint "SOT-89_L4.5-W2.5-P1.50-LS4.2-BR"
+(footprint "LDO_SOT-89_L4.5-W2.5-P1.50-LS4.2-BR"
 	(version 20260206)
 	(generator "pcbnew")
 	(generator_version "10.0")
@@ -6,7 +6,7 @@
 	(property "Reference" "REF**"
 		(at 0 -5.5 0)
 		(layer "F.SilkS")
-		(uuid "1c37400d-a8c2-4d9d-8f98-67e2b018cc33")
+		(uuid "fd96f63c-8b8c-4c4e-917d-b6d16a1246da")
 		(effects
 			(font
 				(size 1 1)
@@ -14,10 +14,10 @@
 			)
 		)
 	)
-	(property "Value" "SOT-89_L4.5-W2.5-P1.50-LS4.2-BR"
+	(property "Value" "LDO_SOT-89_L4.5-W2.5-P1.50-LS4.2-BR"
 		(at 0 5.5 0)
 		(layer "F.Fab")
-		(uuid "7ee2f4b2-0097-48f2-a613-411e4f87549e")
+		(uuid "3d5d1689-7c14-4a6e-bba9-361d238a27b9")
 		(effects
 			(font
 				(size 1 1)
@@ -29,7 +29,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "eda910dd-5308-4b24-bf9a-c7fd8be47a26")
+		(uuid "a22d8e1d-2fdc-4213-ad0b-8c6688c863d5")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -40,7 +40,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "56575f92-f07e-4748-aefe-e24cbbc0e681")
+		(uuid "59ae33f6-bc44-48b9-858e-57e2ef4776b8")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -51,7 +51,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "3711aaa3-ad4f-4a30-b972-2827c5a7d9e4")
+		(uuid "b836df22-eded-42e6-8f0a-eff3ef9a0d98")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -68,7 +68,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "d9079114-bc5a-4b8d-8467-a273f4c1e89c")
+		(uuid "af2e5a6e-d099-48cc-b909-a0c28146e7bd")
 	)
 	(fp_line
 		(start -1.87 2.33)
@@ -78,7 +78,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "9a138f5d-fe12-4145-8a21-39a55303c88c")
+		(uuid "ec816ec8-5762-4253-88bb-72f68680c299")
 	)
 	(fp_line
 		(start 0.78 -2.33)
@@ -88,7 +88,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "887833ea-c39f-497f-90c6-221318bb542a")
+		(uuid "f89f17cf-7786-491c-9eea-54cd4ef7df99")
 	)
 	(fp_line
 		(start 0.78 2.33)
@@ -98,7 +98,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "fe88293a-be9b-4c88-9523-de84ca75db27")
+		(uuid "2fddf358-3d82-41a2-8aec-3e12fe1afd7c")
 	)
 	(fp_circle
 		(center 1.73 2.25)
@@ -109,7 +109,7 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "a66190a3-ce7f-4809-90a5-99094d0819a5")
+		(uuid "2c4cc7de-206b-4135-b104-e6adb1672bc5")
 	)
 	(fp_circle
 		(center 2.29 1.52)
@@ -120,7 +120,7 @@
 		)
 		(fill no)
 		(layer "Cmts.User")
-		(uuid "9108cadc-81e8-40d7-a0f7-252186f078c4")
+		(uuid "0cbad77a-6fd1-459c-994b-701e4776d647")
 	)
 	(fp_line
 		(start -1.87 -2.25)
@@ -130,7 +130,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "2b7ce270-edf3-469d-aa08-00dcc7eaa293")
+		(uuid "eaf95e8b-b10d-471e-98ce-de9929fe32b1")
 	)
 	(fp_line
 		(start -1.87 2.25)
@@ -140,7 +140,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "b9c6c9dd-08b5-455d-9c04-93c239657c7f")
+		(uuid "cfea8aeb-e188-43fb-ac08-8424b69a3bdf")
 	)
 	(fp_line
 		(start 0.63 -2.25)
@@ -150,7 +150,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "b2bce3cd-0b68-4357-8d99-6c827af09323")
+		(uuid "7a4c214d-9d9a-4075-ae90-305f03cd40d7")
 	)
 	(fp_line
 		(start 0.63 2.25)
@@ -160,12 +160,12 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "185d0039-29b7-48b3-93ff-e32c26318508")
+		(uuid "a9cb223f-8cba-4472-bfbd-8ff84b4f1738")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(layer "F.Fab")
-		(uuid "06aee315-a797-45e3-948a-001f6ccc5214")
+		(uuid "e0170bb7-60c3-4e21-8dd7-0698bd50b7bd")
 		(effects
 			(font
 				(size 1 1)
@@ -177,7 +177,7 @@
 		(at 1.36 1.5)
 		(size 1.575 0.672)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "2d372985-8a7d-44f5-9139-1f14a8688825")
+		(uuid "7e7277f6-ea26-4acb-876c-35b49f010451")
 	)
 	(pad "2" smd custom
 		(at -1.36 -0.01)
@@ -225,13 +225,13 @@
 				(fill yes)
 			)
 		)
-		(uuid "1d8bc7dd-cc24-4db8-a023-c1f66da0aced")
+		(uuid "9edd8ec6-c606-47fb-aa7d-ad01bbece378")
 	)
 	(pad "3" smd rect
 		(at 1.36 -1.5)
 		(size 1.575 0.672)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "64b0a8b8-c8f2-41d4-ac8c-e994e6b2eac6")
+		(uuid "a88926ba-4122-4af6-97dc-43c046b1b35f")
 	)
 	(embedded_fonts no)
 	(model "/home/arthur/projects/reaction-wheel-inverted-pendulum/Component_EDA_Models/LDO_ME6211A33PG-N/easyeda2kicad.3dshapes/SOT-89-3_L4.3-W2.5-H1.6-LS4.1-P1.50.wrl"
