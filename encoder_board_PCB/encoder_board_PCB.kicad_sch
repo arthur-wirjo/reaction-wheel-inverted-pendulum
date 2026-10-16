@@ -4049,7 +4049,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "encoder_board_footlib:CONN_S6B-PH-SM4-TBLFSN_JST"
+		(property "Footprint" "encoder_board_footlib:CONN6_S6B-PH_JST"
 			(at 199.39 87.63 0)
 			(hide yes)
 			(show_name no)

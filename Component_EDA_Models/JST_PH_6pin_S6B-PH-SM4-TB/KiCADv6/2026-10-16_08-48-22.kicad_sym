@@ -1,27 +1,27 @@
 (kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
-  (symbol "S6B-PH-SM4-TBLFSN" (pin_names (offset 0.254)) (in_bom yes) (on_board yes)
+  (symbol "S6B-PH-SM4-TB" (pin_names (offset 0.254)) (in_bom yes) (on_board yes)
     (property "Reference" "J" (id 0) (at 8.89 6.35 0)
       (effects (font (size 1.524 1.524)))
     )
-    (property "Value" "S6B-PH-SM4-TBLFSN" (id 1) (at 0 0 0)
+    (property "Value" "S6B-PH-SM4-TB" (id 1) (at 0 0 0)
       (effects (font (size 1.524 1.524)))
     )
-    (property "Footprint" "CONN_S6B-PH-SM4-TBLFSN_JST" (id 2) (at 0 0 0)
+    (property "Footprint" "CONN6_S6B-PH_JST" (id 2) (at 0 0 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
-    (property "Datasheet" "S6B-PH-SM4-TBLFSN" (id 3) (at 0 0 0)
+    (property "Datasheet" "S6B-PH-SM4-TB" (id 3) (at 0 0 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
-    (property "ki_keywords" "S6B-PH-SM4-TB(LF)(SN)" (id 4) (at 0 0 0)
+    (property "ki_keywords" "S6B-PH-SM4-TB" (id 4) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "ki_locked" "" (id 5) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "ki_fp_filters" "CONN_S6B-PH-SM4-TBLFSN_JST" (id 6) (at 0 0 0)
+    (property "ki_fp_filters" "CONN6_S6B-PH_JST" (id 6) (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (symbol "S6B-PH-SM4-TBLFSN_1_1"
+    (symbol "S6B-PH-SM4-TB_1_1"
       (polyline
         (pts
           (xy 10.16 0)
@@ -223,7 +223,7 @@
         (number "6" (effects (font (size 1.27 1.27))))
       )
     )
-    (symbol "S6B-PH-SM4-TBLFSN_1_2"
+    (symbol "S6B-PH-SM4-TB_1_2"
       (polyline
         (pts
           (xy 7.62 0)
