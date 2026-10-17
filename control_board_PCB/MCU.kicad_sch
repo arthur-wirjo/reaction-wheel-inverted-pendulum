@@ -5802,7 +5802,7 @@
 		)
 		(uuid "45879990-18ab-4795-aa71-f966b9f4954c")
 	)
-	(hierarchical_label "USB_OTF_FS_DP"
+	(hierarchical_label "USB_OTF_FS_D_P"
 		(shape bidirectional)
 		(at 54.61 110.49 180)
 		(effects
@@ -5857,7 +5857,7 @@
 		)
 		(uuid "b15fac4b-fd9f-4798-b6f4-8439b1d72501")
 	)
-	(hierarchical_label "USB_OTG_FS_DM"
+	(hierarchical_label "USB_OTG_FS_D_N"
 		(shape bidirectional)
 		(at 54.61 107.95 180)
 		(effects

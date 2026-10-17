@@ -5609,6 +5609,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 153.67) (xy 59.69 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5619a724-2a54-4bd9-8f47-e2020765ae9b")
+	)
+	(wire
+		(pts
 			(xy 218.44 121.92) (xy 220.98 121.92)
 		)
 		(stroke
@@ -5719,16 +5729,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 132.08) (xy 40.64 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "68406c8b-66f0-4a25-a8f4-cf278f11cad0")
-	)
-	(wire
-		(pts
 			(xy 111.76 100.33) (xy 113.03 100.33)
 		)
 		(stroke
@@ -5816,6 +5816,16 @@
 			(type default)
 		)
 		(uuid "752ba29a-a391-45c3-978f-4710a28fa881")
+	)
+	(wire
+		(pts
+			(xy 34.29 153.67) (xy 34.29 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "756adfc4-0dfd-4f76-ba36-9073692d1508")
 	)
 	(wire
 		(pts
@@ -5919,16 +5929,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 133.35) (xy 59.69 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "86ebbdd3-d9a9-4cac-9b8e-e4ad4981d7cb")
-	)
-	(wire
-		(pts
 			(xy 222.25 139.7) (xy 222.25 152.4)
 		)
 		(stroke
@@ -5946,6 +5946,16 @@
 			(type default)
 		)
 		(uuid "8cdb6266-0d9f-48d2-92d0-7906b0d0df51")
+	)
+	(wire
+		(pts
+			(xy 44.45 133.35) (xy 59.69 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d6d1043-802d-4513-a9a5-c64d3159521e")
 	)
 	(wire
 		(pts
@@ -6309,16 +6319,6 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 153.67) (xy 59.69 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6cb5600-075d-471e-928b-c26fb7b049db")
-	)
-	(wire
-		(pts
 			(xy 35.56 57.15) (xy 35.56 58.42)
 		)
 		(stroke
@@ -6376,6 +6376,16 @@
 			(type default)
 		)
 		(uuid "bb0938c1-6868-41b0-a927-448ed3bd9a56")
+	)
+	(wire
+		(pts
+			(xy 34.29 142.24) (xy 35.56 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb6d4cff-22b3-4026-b584-56e01a1943f1")
 	)
 	(wire
 		(pts
@@ -6509,6 +6519,16 @@
 	)
 	(wire
 		(pts
+			(xy 44.45 133.35) (xy 44.45 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c359538d-3439-4de0-94cf-31d270b0251c")
+	)
+	(wire
+		(pts
 			(xy 110.49 104.14) (xy 113.03 104.14)
 		)
 		(stroke
@@ -6516,16 +6536,6 @@
 			(type default)
 		)
 		(uuid "c3d0a6fc-e893-4813-b093-2ed6d67f57c1")
-	)
-	(wire
-		(pts
-			(xy 46.99 133.35) (xy 46.99 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c3f8c9bb-e608-45e6-bf44-5e47d4147497")
 	)
 	(wire
 		(pts
@@ -6749,6 +6759,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 135.89) (xy 34.29 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d79890bc-0148-48bb-814e-847766a9f060")
+	)
+	(wire
+		(pts
 			(xy 59.69 133.35) (xy 59.69 134.62)
 		)
 		(stroke
@@ -6959,13 +6979,13 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 132.08) (xy 40.64 153.67)
+			(xy 44.45 135.89) (xy 34.29 135.89)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e8c073c4-bc87-45f7-a708-ecc54ce89f76")
+		(uuid "e8b0a174-1fd9-49ee-a665-f63204e585f0")
 	)
 	(wire
 		(pts
@@ -7246,6 +7266,16 @@
 			(type default)
 		)
 		(uuid "fe45d134-0a46-46c2-ad8c-6e7695cedcb0")
+	)
+	(wire
+		(pts
+			(xy 34.29 139.7) (xy 35.56 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff1ef12c-a836-4291-a4c2-fdc93ebeb7a0")
 	)
 	(label "USB_D_P"
 		(at 201.93 143.51 0)
@@ -8075,7 +8105,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 134.3152 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -9315,7 +9345,7 @@
 	)
 	(symbol
 		(lib_id "control_board_symlib:KF2EDGR-3.81-2P")
-		(at 45.72 128.27 90)
+		(at 39.37 140.97 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9325,7 +9355,7 @@
 		(dnp no)
 		(uuid "578041c0-e415-4982-806a-794014889ef7")
 		(property "Reference" "CN1"
-			(at 43.688 120.142 90)
+			(at 40.64 133.858 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9336,7 +9366,7 @@
 			)
 		)
 		(property "Value" "KF2EDGR-3.81-2P"
-			(at 38.1 122.682 90)
+			(at 49.784 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9347,7 +9377,7 @@
 			)
 		)
 		(property "Footprint" "control_board_footlib:Phoenix_CONN-TH_2P-P3.81_KF2EDGR-3.81-2P"
-			(at 54.61 128.27 0)
+			(at 39.37 149.86 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9358,7 +9388,7 @@
 			)
 		)
 		(property "Datasheet" "https://lcsc.com/product-detail/Pluggable-System-Terminal-Block_Cixi-Kefa-Elec-KF2EDGR-3-81-2P_C441182.html"
-			(at 57.15 128.27 0)
+			(at 39.37 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9369,7 +9399,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 45.72 128.27 0)
+			(at 39.37 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9380,7 +9410,7 @@
 			)
 		)
 		(property "Manufacturer" "KEFA(科发)"
-			(at 59.69 128.27 0)
+			(at 39.37 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9391,7 +9421,7 @@
 			)
 		)
 		(property "MPN" "KF2EDGR-3.81-2P"
-			(at 62.23 128.27 0)
+			(at 39.37 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9402,7 +9432,7 @@
 			)
 		)
 		(property "LCSC Part" "C441182"
-			(at 64.77 128.27 0)
+			(at 39.37 160.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15020,7 +15050,7 @@
 				(justify right)
 			)
 		)
-		(pin "USB_OTF_FS_DP" bidirectional
+		(pin "USB_OTF_FS_D_P" bidirectional
 			(at 160.02 132.08 0)
 			(uuid "62d8b481-32ff-405b-8727-7a9b71bfe00c")
 			(effects
@@ -15030,7 +15060,7 @@
 				(justify right)
 			)
 		)
-		(pin "USB_OTG_FS_DM" bidirectional
+		(pin "USB_OTG_FS_D_N" bidirectional
 			(at 160.02 128.27 0)
 			(uuid "d26fb655-92b9-48a2-972c-0704ccf012c4")
 			(effects
