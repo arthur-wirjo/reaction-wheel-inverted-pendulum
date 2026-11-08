@@ -2,14 +2,18 @@
 
 <img width="300" alt="control_board_PCB_V1" src="https://github.com/user-attachments/assets/416d7393-27cb-4652-adee-f799d5f0c942" />
 <img width="300" alt="solidworks_mechanical_setup" src="https://github.com/user-attachments/assets/7b6c8edf-8ffc-41e8-991d-190b54d3e69b" />
+<img width="300" alt="IMG_20261029_080815_2" src="https://github.com/user-attachments/assets/cca72489-3b4f-4ce4-a304-28c06302b1cf" />
+<img width="300" alt="IMG_20261101_163136" src="https://github.com/user-attachments/assets/a9174aa8-f36a-4378-affa-efb8ecdf4ad2" />
 
-A custom-engineered Reaction Wheel Inverted Pendulum designed as a physical testbed for advanced modern control theory. This project features a custom-designed STM32H7 control board, dual high-resolution magnetic encoders, and implements complex control strategies ranging from LQR to Non-linear Model Predictive Control (NMPC).
+
+
+A custom Reaction Wheel Inverted Pendulum designed as a physical testbed for advanced modern control theory. This project features a custom-designed STM32H7 control board, dual high-resolution magnetic encoders, and implements complex control strategies ranging from LQR to Non-linear Model Predictive Control (NMPC).
 
 ## Overview
 
-Following the development of my [DIY FOC Motor Controller](#), I wanted to shift my focus from power electronics to **advanced control theory and system dynamics**. The inverted pendulum is a classic non-linear control problem. By using a reaction wheel, the system is underactuated and requires continuous, precise torque commands to maintain balance.
+Following the development of my DIY FOC Motor Controller Project, I wanted to shift my focus from power electronics to **advanced control theory and system dynamics**. The inverted pendulum is a classic non-linear control problem. By using a reaction wheel, the system is underactuated and requires continuous, precise torque commands to maintain balance.
 
-Instead of using off-the-shelf development boards, I designed a custom STM32H7-based flight-controller-style board to handle the heavy computational requirements of real-time NMPC. The board communicates via FDCAN with a Flipsky Mini VESC 6.7 Pro, which handles the low-level Field-Oriented Control (FOC) of the reaction wheel. 
+Instead of using off-the-shelf development boards, I designed a custom STM32H7-based control board to handle the heavy computational requirements of real-time NMPC. The board communicates via FDCAN with a Flipsky Mini VESC 6.7 Pro, which handles the low-level Field-Oriented Control (FOC) of the reaction wheel. 
 
 ## Key Features
 
@@ -74,3 +78,5 @@ The project is currently in active development. Hardware design is complete, and
 | Oct 15 | Control board and modular encoder board schematics completed; BOM finalized and sourced. |
 | Oct 16 | Mechanical CAD finalized. Encoder board PCB layout completed. |
 | Oct 17 | Control baord PCB layout compoleted. PCBs ordered. |
+| Oct 28 | PCB and Components Arrived. |
+| Oct 29 | Control board and encoder board PCBs soldered. |
