@@ -57,15 +57,17 @@
 | **Connectors** | 6-pin JST-GH | - | - | - | 1 |
 | | 6-pin JST-PH | - | - | - | 1 |
 
-### Other Components (Cables, Motor, Mechanical)
+### Other Components (Cables, Mating Plugs, Motor, Mechanical)
 
 | Category | Description / Value | Qty |
 | :--- | :--- | :--- |
-| **Cables** | 6-pin JST-GH (one sided) | 1 |
-| | 6-pin JST-PH (double sided) | 1 |
-| | 4-pin JST-PH (one sided) | 1 |
-| | 4 wire Slip Ring, 10A rating | 1 |
-| **Motor, ESC, Power** | TianYi 4006 380Kv drone BLDC motor | 1 |
+| **Cables & Mating Plugs** | 6-pin JST-GH cable (one-sided) | 1 |
+| | 6-pin JST-PH cable (double-sided) | 1 |
+| | 4-pin JST-PH cable (one-sided) | 1 |
+| | XT30U-M Male Wire Plug (mates with `U6` on Control Board) | 1 |
+| | Phoenix 3.81mm 2-Pin Female Terminal Block Plug (mates with `CN1` on Control Board) | 1 |
+| | 4-wire Slip Ring, 10A rating | 1 |
+| **Motor, ESC, Power** | TianYi 4006 380KV Drone BLDC Motor | 1 |
 | | Flipsky Mini VESC 6.7 Pro | 1 |
 | **Mechanical** | Bearing 608-ZZ | 1 |
 | | Main rig (3D printed with PLA/PLA+) | 1 |
