@@ -1,0 +1,10 @@
+../Core/Src/freertos.c:84:23:check_even_parity	16	static
+../Core/Src/freertos.c:125:6:MX_FREERTOS_Init	8	static
+../Core/Src/freertos.c:170:6:StartControlTask	24	static
+../Core/Src/freertos.c:215:6:StartTelemetryTask	64	static
+../Core/Src/freertos.c:264:6:HAL_SPI_TxRxCpltCallback	16	static
+../Core/Src/freertos.c:281:6:VESC_CAN_Init	40	static
+../Core/Src/freertos.c:295:13:VESC_Send_Packet_Int32	56	static
+../Core/Src/freertos.c:325:6:VESC_Set_Mech_RPM	24	static
+../Core/Src/freertos.c:331:6:VESC_Set_Current_Amps	24	static
+../Core/Src/freertos.c:337:6:HAL_FDCAN_RxFifo0Callback	80	static

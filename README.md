@@ -61,9 +61,9 @@ The project is currently in active development. Hardware design is complete, and
 
 - [x] **Phase 1: Hardware & PCB Design** (Schematics, PCB layout, component sourcing).
 - [ ] **Phase 2: Hardware Bring-up** 
-  - [ ] Flash and verify STM32H7 custom board.
-  - [ ] Test VESC FOC torque/current control via VESC Tool.
-  - [ ] Validate AS5047P SPI joint encoder (ensure 360° continuous reading).
+  - [x] Flash and verify STM32H7 custom board.
+  - [x] Test VESC FOC torque/current control via VESC Tool.
+  - [x] Validate AS5047P SPI joint encoder (ensure 360° continuous reading).
   - [ ] Establish STM32-to-VESC CAN communication.
 - [ ] **Phase 3: System ID & Baseline Control** (Mechanical assembly, System ID, PID implementation).
 - [ ] **Phase 4: Modern Control** (MATLAB simulation, LQR implementation, Energy-based swing-up).
@@ -77,6 +77,8 @@ The project is currently in active development. Hardware design is complete, and
 | Oct 12 | Schematic capture for STM32H7 control board started. |
 | Oct 15 | Control board and modular encoder board schematics completed; BOM finalized and sourced. |
 | Oct 16 | Mechanical CAD finalized. Encoder board PCB layout completed. |
-| Oct 17 | Control baord PCB layout compoleted. PCBs ordered. |
+| Oct 17 | Control board PCB layout completed. PCBs ordered. |
 | Oct 28 | PCB and Components Arrived. |
 | Oct 29 | Control board and encoder board PCBs soldered. |
+| Nov 8 | VESC FOC torque/current and velocity control via VESC Tool tested. |
+| Nov 10 | STM32H7 Firmware configuration done and wrote simple firmware to test SPI encoder, LEDs, and buttons |
