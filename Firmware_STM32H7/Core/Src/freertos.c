@@ -30,6 +30,7 @@
 #include "spi.h"
 #include "gpio.h"
 #include "fdcan.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,17 +50,18 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+
 // === AS5047P SPI DMA Variables ===
 // Corrected Angle Register = 0x3FFF and set Bit 14 to 1 (for read) and set Bit 15 to 1 (for even parity bit)
 uint16_t spi1_tx_buf = 0xFFFF; // 0xFFF = 0x3FFF + Read Bit + Even Parity
 uint16_t spi1_rx_buf = 0;
-
 volatile uint16_t encoder_raw_14bit = 0; // 0 to 15383
-volatile float encoder_angle_deg = 0.0f; 
+volatile int32_t encoder_zero_offset_raw = 0; // 0 deg = down, 180 deg = upright
+volatile float pendulum_angle_deg = 0.0f;
+volatile float upright_error_deg = 0.0f;
+volatile float pendulum_vel_deg_s = 0.0f; // filtered angular velocity
 volatile uint8_t encoder_error_flag = 0; // 1 if parity or framing error detected
-volatile uint8_t user_btn_pressed = 0; // button is active low on PB9
 volatile uint32_t spi_dma_callback_cnt = 0; // increments at 1000Hz if DMA is healthy
-volatile uint32_t vesc_debug_any_rx_cnt = 0;
 
 // === VESC FDCAN Settings and Telemetry Variables ===
 #define VESC_CAN_ID 108
@@ -79,6 +81,37 @@ volatile float vesc_current_amps = 0.0f; // Iq reported by VESC
 volatile float vesc_duty_cycle = 0.0f; // Duty cycle (-1.0 to 1.0)
 volatile uint32_t vesc_rx_cnt = 0; // Increments every time VESC Status 1 arrives
 volatile uint32_t vesc_tx_err_cnt = 0; // Stays 0 if CAN bus ACK / wiring is healthy
+
+// === Finite State Machine ===
+typedef enum {
+  UNCALIBRATED,
+  READY,
+  RUNNING
+} RWIP_FSM;
+
+volatile RWIP_FSM RWIP_state = UNCALIBRATED; 
+
+// === Calibration Counter 
+volatile uint16_t calib_sample_cnt = 0;
+volatile uint32_t calib_accumulator = 0;
+volatile uint8_t is_calibrating = 0;
+
+// === User Button Edge Detection ===
+volatile uint8_t user_btn_pressed = 0; // button is active low on PB9
+uint8_t user_btn_prev = 0;
+
+// === PID & Wheel Damping Gains
+volatile float Kp = 0.2f; // to be tuned
+volatile float Ki = 0.0f; // to be tuned
+volatile float Kd = 0.03f; // to be tuned
+volatile float Kw = 0.0f; // to be tuned, Wheel velocity damping (Amps per Mech RPM)
+
+volatile float motor_dir = -1.0f; 
+volatile float pid_integral = 0.0f;
+volatile float commanded_current_amps = 0.0f;
+
+#define MAX_CURRENT_AMPS 2.0f
+#define SAFETY_CUTOFF_DEG 25.0f
 
 // helper function to check 16-bit even parity from AS5047P
 static inline uint8_t check_even_parity(uint16_t val) {
@@ -173,13 +206,13 @@ void StartControlTask(void *argument)
   
   // Make sure CS (PC4) start HIGH
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
-  
   // Start FDCAN1 peripheral & RX interrupts
   VESC_CAN_Init();
   osDelay(10);
 
   uint32_t tick = osKernelGetTickCount();
   uint32_t loop_div = 0;
+  const float dt_ctrl = 0.005f; // 200Hz control output loop (5ms)
 
   /* Infinite loop */
   for(;;)
@@ -189,14 +222,50 @@ void StartControlTask(void *argument)
 
     // Assert Chip Select (PC4 -> LOW)
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-    // Trigger non-blocking 16-bit SPI DMA transfer
+    // Trigger 16-bit SPI DMA transfer
     HAL_SPI_TransmitReceive_DMA(&hspi1, (uint8_t*)&spi1_tx_buf, (uint8_t*)&spi1_rx_buf, 1);
 
-    // Send VESC CAN Command at 200Hz
+    // Run FSM Control and CAN Output at 200Hz
     if (loop_div % 5 == 0) {
-      if (user_btn_pressed) {
-        VESC_Set_Mech_RPM(300.0f);
+      if (RWIP_state == RUNNING) {
+        // check if pendulum fall past safety cutoff of +/- 25 deg
+        if (fabsf(upright_error_deg) > SAFETY_CUTOFF_DEG) {
+          commanded_current_amps = 0.0f;
+          pid_integral = 0.0f;
+          RWIP_state = READY;
+          VESC_Set_Current_Amps(0.0f);
+        } else {
+          // accumulate integral error with anti-windup
+          pid_integral += upright_error_deg * dt_ctrl;
+          if (pid_integral > 10.0f) {
+            pid_integral = 10.0f;
+          }
+          if (pid_integral < -10.0f) {
+            pid_integral = -10.0f;
+          }
+
+          // PID control + Wheel velocity damping control law
+          float u_amps = (Kp * upright_error_deg) + 
+                         (Ki * pid_integral) + 
+                         (Kd * pendulum_vel_deg_s) +
+                         (Kw * vesc_mech_rpm);
+          
+          // apply motor direction sign and clamp current
+          u_amps *= motor_dir;
+          if (u_amps > MAX_CURRENT_AMPS) {
+            u_amps = MAX_CURRENT_AMPS;
+          }
+          if (u_amps < -MAX_CURRENT_AMPS) {
+            u_amps = -MAX_CURRENT_AMPS;
+          }
+
+          commanded_current_amps = u_amps;
+          VESC_Set_Current_Amps(u_amps);
+        }
       } else {
+        // RWIP_state in UNCALIBRATED or READY state
+        commanded_current_amps = 0.0f;
+        pid_integral = 0.0f;
         VESC_Set_Current_Amps(0.0f);
       }
     }
@@ -224,37 +293,80 @@ void StartTelemetryTask(void *argument)
     // Read user button on PB9 (Active low)
     if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9) == GPIO_PIN_RESET) {
       user_btn_pressed = 1;
-      // Turn on Green LED (PD7) while button is held down
-      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET);
     } else {
       user_btn_pressed = 0;
-      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET);
     }
 
-    // Blink Red Heartbeat LED (PD5) every 250ms
+    // FSM button handling
+    if (user_btn_pressed && !user_btn_prev) {
+      // button was just pressed
+      switch (RWIP_state) {
+        case UNCALIBRATED:
+          if (!is_calibrating) {
+            SEGGER_RTT_WriteString(0, "Calibrating....\r\n");
+            calib_accumulator = 0;
+            calib_sample_cnt = 0;
+            is_calibrating = 1; 
+          }
+          break;
+        
+        case READY:
+          if (fabsf(upright_error_deg) < 15.0f) {
+            pid_integral = 0.0f;
+            RWIP_state = RUNNING;
+            SEGGER_RTT_WriteString(0, "Running!!!\r\n");
+          } else {
+            SEGGER_RTT_WriteString(0, "Please move pendulum +/- 15 deg from upright position!\r\n");
+          }
+          break;
+
+        case RUNNING:
+          RWIP_state = READY;
+          SEGGER_RTT_WriteString(0, "Motor Disarming!\r\n");
+          break;
+      }
+    }
+
+    user_btn_prev = user_btn_pressed;
+
+    // FSM Green LED handling (PD7)
+    switch (RWIP_state) {
+      case UNCALIBRATED:
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET); // turn off LED
+        break;
+      case READY:
+        if (loop_cnt % 5 == 0) { // Blink at 2Hz (toggle every 250ms)
+          HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7);
+        }
+        break;
+      case RUNNING:
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET); // turn on LED
+        break;
+    }
+
+    // Blink Red Heartbeat LED (PD5) at 2Hz (toggle every 250ms)
     if (loop_cnt % 5 == 0) {
       HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_5);
     }
 
-    // Print Telemetry over SEGGER RTT every 100ms
+    // Print Telemetry over SEGGER RTT at 10Hz (100ms)
     if (loop_cnt % 2 == 0) {
-      int angle_int = (int)encoder_angle_deg;
-      int angle_frac = (int)((encoder_angle_deg - (float)angle_int) * 100.0f);
-      int rpm_int = (int)vesc_mech_rpm;
-      int curr_mA = (int)(vesc_current_amps * 1000.0f);
-      SEGGER_RTT_printf(0, "BTN: %d | Angle: %3d.%02d deg | RPM:%5d | Iq: %5dmA | CAN_RX: %lu | CAN_Err: %lu | Any RX: %lu\r\n",
-                        user_btn_pressed,
+      int angle_int = (int)pendulum_angle_deg;
+      int err_int = (int)(upright_error_deg * 100.0f);
+      int cmd_mA = (int)(commanded_current_amps * 1000.0f);
+      int vesc_rpm = (int)vesc_mech_rpm;
+      int vesc_curr_mA = (int)(vesc_current_amps * 1000.0f);
+      SEGGER_RTT_printf(0, "State:%d | Angle:%3d deg | TopErr:%4d cDeg | CmdI:%5d mA | VescRPM:%5d | VescCur:%5d mA\r\n",
+                        (int)RWIP_state, 
                         angle_int,
-                        angle_frac,
-                        rpm_int,
-                        curr_mA,
-                        vesc_rx_cnt,
-                        vesc_tx_err_cnt,
-                        vesc_debug_any_rx_cnt); 
+                        err_int,
+                        cmd_mA,
+                        vesc_rpm,
+                        vesc_curr_mA); 
     }
     
     loop_cnt++;
-    osDelay(50);
+    osDelay(50); // 20Hz loop (50ms)
   }
   /* USER CODE END StartTelemetryTask */
 }
@@ -265,13 +377,48 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi) {
   if (hspi->Instance == SPI1) {
     // De-assert Chip Select (PC4 -> HIGH)
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+    
     // check Bit 14 (error flag from AS5047P) and Bit 15 (Even Parity)
     if ((spi1_rx_buf & 0x4000) || (check_even_parity(spi1_rx_buf) != 0)) {
       encoder_error_flag = 1;
     } else {
       encoder_error_flag = 0;
       encoder_raw_14bit = spi1_rx_buf & 0x3FFF; // mask lower 14 bits
-      encoder_angle_deg = ((float)encoder_raw_14bit * 360.0f) / 16384.0f;
+      
+      // handle 200 sample zero calibration
+      if (is_calibrating) {
+        calib_accumulator += encoder_raw_14bit;
+        calib_sample_cnt++;
+        if (calib_sample_cnt >= 200) {
+          encoder_zero_offset_raw = (int32_t)(calib_accumulator) / (int32_t)(calib_sample_cnt);
+          is_calibrating = 0;
+          RWIP_state = READY;
+        }
+      }
+
+      int32_t cal_raw = ((int32_t)encoder_raw_14bit - encoder_zero_offset_raw);
+      cal_raw = cal_raw & 0x3FFF; // wrap cal_raw (0 to 16383) using & 0x3FFF
+      pendulum_angle_deg = ((float)cal_raw * 360.0f) / 16384.0f;
+
+      // copmute signed upright error
+      int32_t err_counts = cal_raw - 8192; // err_counts will be (-8192 to 8192) 
+      float new_upright_err_deg = ((float)err_counts * 360.0f) / 16384.0f;
+
+      // compute derivative / velocity (dt = 0.001 at 1kHz) with low pass filter
+      static int32_t prev_cal_raw = 0;
+      int32_t delta_counts = cal_raw - prev_cal_raw;
+      if (delta_counts > 8192) { // wrap delta_counts (-8192 to 8192)
+        delta_counts -= 16384;
+      } else if (delta_counts < -8192) {
+        delta_counts += 16384;
+      }
+      prev_cal_raw = cal_raw;
+
+      float raw_vel_deg_s = ((float)delta_counts * 360.0f / 16384.0f) * 1000.0f; // *1000 for deg/ms to deg/s
+      float alpha = 0.15; // low pass filter
+      pendulum_vel_deg_s = ((1.0f - alpha) * pendulum_vel_deg_s) + (alpha * raw_vel_deg_s);
+
+      upright_error_deg = new_upright_err_deg;
     }
     spi_dma_callback_cnt++;
   }
@@ -340,7 +487,6 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
     uint8_t RxData[8];
 
     if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
-      vesc_debug_any_rx_cnt++;
       if (RxHeader.IdType == FDCAN_EXTENDED_ID) {
         uint8_t sender_id = RxHeader.Identifier & 0xFF;
         uint8_t packet_id = (RxHeader.Identifier >> 8) & 0xFF;
