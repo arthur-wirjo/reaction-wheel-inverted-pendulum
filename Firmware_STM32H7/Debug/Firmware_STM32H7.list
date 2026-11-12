@@ -33,11 +33,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_macro  0003dbe3  00000000  00000000  000483d3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_line   0002a79b  00000000  00000000  00085fb6  2**0
+ 15 .debug_line   0002a79c  00000000  00000000  00085fb6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    0017c187  00000000  00000000  000b0751  2**0
+ 16 .debug_str    0017c187  00000000  00000000  000b0752  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .comment      00000043  00000000  00000000  0022c8d8  2**0
+ 17 .comment      00000043  00000000  00000000  0022c8d9  2**0
                   CONTENTS, READONLY
  18 .debug_frame  00008d80  00000000  00000000  0022c91c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -2424,41 +2424,41 @@ void StartControlTask(void *argument)
  80010b6:	4813      	ldr	r0, [pc, #76]	@ (8001104 <StartControlTask+0x90>)
  80010b8:	f009 f85a 	bl	800a170 <HAL_SPI_TransmitReceive_DMA>
 
-    // Send VESC CAN Command at 50Hz
-    if (loop_div % 20 == 0) {
+    // Send VESC CAN Command at 200Hz
+    if (loop_div % 5 == 0) {
  80010bc:	68b9      	ldr	r1, [r7, #8]
  80010be:	4b12      	ldr	r3, [pc, #72]	@ (8001108 <StartControlTask+0x94>)
  80010c0:	fba3 2301 	umull	r2, r3, r3, r1
- 80010c4:	091a      	lsrs	r2, r3, #4
+ 80010c4:	089a      	lsrs	r2, r3, #2
  80010c6:	4613      	mov	r3, r2
  80010c8:	009b      	lsls	r3, r3, #2
  80010ca:	4413      	add	r3, r2
- 80010cc:	009b      	lsls	r3, r3, #2
- 80010ce:	1aca      	subs	r2, r1, r3
- 80010d0:	2a00      	cmp	r2, #0
- 80010d2:	d10d      	bne.n	80010f0 <StartControlTask+0x7c>
+ 80010cc:	1aca      	subs	r2, r1, r3
+ 80010ce:	2a00      	cmp	r2, #0
+ 80010d0:	d10d      	bne.n	80010ee <StartControlTask+0x7a>
       if (user_btn_pressed) {
- 80010d4:	4b0d      	ldr	r3, [pc, #52]	@ (800110c <StartControlTask+0x98>)
- 80010d6:	781b      	ldrb	r3, [r3, #0]
- 80010d8:	b2db      	uxtb	r3, r3
- 80010da:	2b00      	cmp	r3, #0
- 80010dc:	d004      	beq.n	80010e8 <StartControlTask+0x74>
+ 80010d2:	4b0e      	ldr	r3, [pc, #56]	@ (800110c <StartControlTask+0x98>)
+ 80010d4:	781b      	ldrb	r3, [r3, #0]
+ 80010d6:	b2db      	uxtb	r3, r3
+ 80010d8:	2b00      	cmp	r3, #0
+ 80010da:	d004      	beq.n	80010e6 <StartControlTask+0x72>
         VESC_Set_Mech_RPM(300.0f);
- 80010de:	ed9f 0a0c 	vldr	s0, [pc, #48]	@ 8001110 <StartControlTask+0x9c>
- 80010e2:	f000 f98b 	bl	80013fc <VESC_Set_Mech_RPM>
- 80010e6:	e003      	b.n	80010f0 <StartControlTask+0x7c>
+ 80010dc:	ed9f 0a0c 	vldr	s0, [pc, #48]	@ 8001110 <StartControlTask+0x9c>
+ 80010e0:	f000 f98c 	bl	80013fc <VESC_Set_Mech_RPM>
+ 80010e4:	e003      	b.n	80010ee <StartControlTask+0x7a>
       } else {
         VESC_Set_Current_Amps(0.0f);
- 80010e8:	ed9f 0a0a 	vldr	s0, [pc, #40]	@ 8001114 <StartControlTask+0xa0>
- 80010ec:	f000 f9a0 	bl	8001430 <VESC_Set_Current_Amps>
+ 80010e6:	ed9f 0a0b 	vldr	s0, [pc, #44]	@ 8001114 <StartControlTask+0xa0>
+ 80010ea:	f000 f9a1 	bl	8001430 <VESC_Set_Current_Amps>
       }
     }
     loop_div++; 
- 80010f0:	68bb      	ldr	r3, [r7, #8]
- 80010f2:	3301      	adds	r3, #1
- 80010f4:	60bb      	str	r3, [r7, #8]
+ 80010ee:	68bb      	ldr	r3, [r7, #8]
+ 80010f0:	3301      	adds	r3, #1
+ 80010f2:	60bb      	str	r3, [r7, #8]
     tick += 1;
- 80010f6:	e7d0      	b.n	800109a <StartControlTask+0x26>
+ 80010f4:	e7d1      	b.n	800109a <StartControlTask+0x26>
+ 80010f6:	bf00      	nop
  80010f8:	58020800 	.word	0x58020800
  80010fc:	2400058c 	.word	0x2400058c
  8001100:	24000000 	.word	0x24000000

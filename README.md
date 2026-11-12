@@ -59,13 +59,21 @@ The core objective of this project is to model the system in MATLAB/Simulink and
 
 The project is currently in active development. Hardware design is complete, and parts are being manufactured/sourced.
 
-- [x] **Phase 1: Hardware & PCB Design** (Schematics, PCB layout, component sourcing).
-- [ ] **Phase 2: Hardware Bring-up** 
+- [x] **Phase 1: Hardware & PCB Design**
+  - [x] Schematics
+  - [x] PCB layout
+  - [x] Component sourcing
+  - [x] PCB soldering/assembly
+  - [x] Mechanical design 
+- [x] **Phase 2: Hardware Bring-up** 
+  - [x] Mechanical assembly
   - [x] Flash and verify STM32H7 custom board.
   - [x] Test VESC FOC torque/current control via VESC Tool.
   - [x] Validate AS5047P SPI joint encoder (ensure 360° continuous reading).
-  - [ ] Establish STM32-to-VESC CAN communication.
-- [ ] **Phase 3: System ID & Baseline Control** (Mechanical assembly, System ID, PID implementation).
+  - [x] Establish STM32-to-VESC CAN communication.
+- [ ] **Phase 3: System ID & Baseline Control**
+  - [ ] PID implementation
+  - [ ] System identification 
 - [ ] **Phase 4: Modern Control** (MATLAB simulation, LQR implementation, Energy-based swing-up).
 - [ ] **Phase 5: Advanced Control** (Acados NMPC generation and deployment).
 
@@ -82,3 +90,4 @@ The project is currently in active development. Hardware design is complete, and
 | Oct 29 | Control board and encoder board PCBs soldered. |
 | Nov 8 | VESC FOC torque/current and velocity control via VESC Tool tested. |
 | Nov 10 | STM32H7 Firmware configuration done and wrote simple firmware to test SPI encoder, LEDs, and buttons |
+| Nov 12 | STM32H7 CAN Bus communication with VESC working. Velocity and torque/current command with RPM and motor current feedback successful. | 

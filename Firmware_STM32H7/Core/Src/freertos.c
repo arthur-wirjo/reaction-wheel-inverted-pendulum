@@ -192,8 +192,8 @@ void StartControlTask(void *argument)
     // Trigger non-blocking 16-bit SPI DMA transfer
     HAL_SPI_TransmitReceive_DMA(&hspi1, (uint8_t*)&spi1_tx_buf, (uint8_t*)&spi1_rx_buf, 1);
 
-    // Send VESC CAN Command at 50Hz
-    if (loop_div % 20 == 0) {
+    // Send VESC CAN Command at 200Hz
+    if (loop_div % 5 == 0) {
       if (user_btn_pressed) {
         VESC_Set_Mech_RPM(300.0f);
       } else {
