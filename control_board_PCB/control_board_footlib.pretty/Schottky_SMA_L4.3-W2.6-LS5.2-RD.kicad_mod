@@ -1,0 +1,224 @@
+(footprint "Schottky_SMA_L4.3-W2.6-LS5.2-RD"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "SS56")
+	(property "Reference" "REF**"
+		(at 0 -4 0)
+		(layer "F.SilkS")
+		(uuid "6c434fce-2a7b-4ea6-8e0e-b7409cd929de")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Schottky_SMA_L4.3-W2.6-LS5.2-RD"
+		(at 0 4 0)
+		(layer "F.Fab")
+		(uuid "553eb377-04df-4d4e-8098-702aedbc829d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c78c6ec4-70a9-40ad-bd4a-3dced5768b5f")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "73519f07-9334-4f49-b900-40cbcf36404d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "LCSC Part" "C65009"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a6af9537-2108-4cf4-ae40-0db675064635")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -2.6 -1.43)
+		(end 2.6 -1.43)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "30285909-2d34-4126-8c5e-c5863c49f7ad")
+	)
+	(fp_line
+		(start -2.6 1.43)
+		(end 2.6 1.43)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "73fd6d17-faef-4dcd-b42c-837202c65970")
+	)
+	(fp_line
+		(start -0.88 -1.43)
+		(end -0.88 1.43)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9c89810b-bd1d-4b7c-92b9-b7c1c5aefab5")
+	)
+	(fp_line
+		(start 2.59 1.18)
+		(end 2.6 1.41)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "853f235a-38de-4935-9089-6b01da462557")
+	)
+	(fp_line
+		(start 2.6 -1.43)
+		(end 2.6 -1.19)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "709ab1d0-b667-4963-81f0-c774df72a71a")
+	)
+	(fp_circle
+		(center -2.61 1.3)
+		(end -2.58 1.3)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "cec75eec-0206-46b7-b22e-c7c13c74f6ac")
+	)
+	(fp_poly
+		(pts
+			(xy -2.52001 -1.50241) (xy -2.521331 -1.095807) (xy -2.980868 -1.100328) (xy -2.97721 -1.50241) (xy -2.52001 -1.50241)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "b6829c9e-0263-4197-9d05-015c906e00da")
+	)
+	(fp_poly
+		(pts
+			(xy -2.511781 1.095959) (xy -2.513101 1.502562) (xy -2.972638 1.498041) (xy -2.968981 1.095959) (xy -2.511781 1.095959)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "fd842a09-17ab-421a-8e80-33b10b1b75c9")
+	)
+	(fp_line
+		(start -2.16 -1.3)
+		(end 2.16 -1.3)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "13a34ede-ec61-4210-9084-60c396ac9104")
+	)
+	(fp_line
+		(start -2.16 1.3)
+		(end -2.16 -1.3)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "05d82411-691b-482b-af2e-fc95f7154450")
+	)
+	(fp_line
+		(start 2.16 -1.3)
+		(end 2.16 1.3)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ba41e32c-538a-4126-9577-c7607bdcc872")
+	)
+	(fp_line
+		(start 2.16 1.3)
+		(end -2.16 1.3)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "dcd60642-9009-40f8-aca8-028825cae189")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "03033069-ce00-4a6f-bc19-52b6edb95f69")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -2.2 0 180)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "58ecd859-c527-4613-966a-0249a93f1dcd")
+	)
+	(pad "2" smd rect
+		(at 2.2 0 180)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "4f5640c1-a6c0-442c-8ef2-30042b9eac40")
+	)
+	(embedded_fonts no)
+	(model "/home/arthur/projects/ICE_end-of-arm_tooling_controller/Component_EDA_Models/Schottky_MDD_SS56/easyeda2kicad.3dshapes/SMA_L4.3-W2.6-LS5.2-RD.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

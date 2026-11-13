@@ -5967,6 +5967,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 193.04 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "d5e31be6-5565-4735-8bf4-67198e093a8b")
 		)
@@ -6269,6 +6280,17 @@
 			)
 		)
 		(property "Description" "Ferrite bead"
+			(at 218.44 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C1512133"
 			(at 218.44 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -6754,6 +6776,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C22548"
+			(at 48.26 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "709e3762-d611-4c9c-a57a-70ab4f3dbba0")
 		)
@@ -6913,6 +6946,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C5199872"
+			(at 203.2 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "e1ec4b8c-41fd-4d03-9a76-9733782955ec")
 		)
@@ -7061,6 +7105,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 203.2 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C5199872"
 			(at 203.2 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -7347,6 +7402,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 209.55 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "00c07705-b518-49e3-a1ce-3a85cb914cfa")
 		)
@@ -7583,6 +7649,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C19110"
+			(at 138.43 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "44997c9c-1161-4d93-9889-48ed2b9eebdb")
 		)
@@ -7654,6 +7731,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 227.33 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C882576"
 			(at 227.33 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -7745,6 +7833,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 209.55 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e516bc29-4967-418c-93ac-04fe6faf7a93")
 		)
@@ -7826,6 +7925,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 228.6 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "311e1cd0-dc6a-4d25-98a8-a4daac1009eb")
 		)
@@ -7897,6 +8007,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 252.73 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C882576"
 			(at 252.73 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -8220,6 +8341,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 237.49 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8e8fc843-bd99-4eea-969b-f3936cc17edd")
 		)
@@ -8378,6 +8510,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C22548"
+			(at 137.16 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "20788a52-a974-48f0-971c-c3dd59a619c7")
 		)
@@ -8449,6 +8592,17 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 242.57 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C5139509"
 			(at 242.57 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -8628,6 +8782,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C19273151"
+			(at 123.19 156.21 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2cc60dfd-c221-495d-b164-5809a4faffcd")
 		)
@@ -8720,6 +8885,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C19171390"
+			(at 137.16 156.21 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "0ab3b15b-67d8-4f7d-a9ac-0ba29796292a")
 		)
@@ -8791,6 +8967,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 246.38 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C126618"
 			(at 246.38 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -8873,6 +9060,17 @@
 			)
 		)
 		(property "Description" ""
+			(at 166.37 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C114409"
 			(at 166.37 107.95 0)
 			(hide yes)
 			(show_name no)
@@ -9249,6 +9447,17 @@
 			)
 		)
 		(property "Description" ""
+			(at 55.88 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C114409"
 			(at 55.88 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -9789,6 +9998,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C5139509"
+			(at 48.26 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "37bb70e4-cee6-48ad-a784-c443833be7ef")
 		)
@@ -9860,6 +10080,17 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 223.52 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C5139509"
 			(at 223.52 148.59 0)
 			(hide yes)
 			(show_name no)
@@ -10029,6 +10260,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C1590"
+			(at 232.41 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "cf343d1d-ab87-48c2-be37-012b9f24f28d")
 		)
@@ -10100,6 +10342,17 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 218.44 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C2906974"
 			(at 218.44 58.42 0)
 			(hide yes)
 			(show_name no)
@@ -10268,6 +10521,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C22548"
+			(at 123.19 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ee9e1de6-5e8d-47ae-90a4-1455a5df50a6")
 		)
@@ -10339,6 +10603,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 201.93 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C1590"
 			(at 201.93 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -10507,6 +10782,17 @@
 				)
 			)
 		)
+		(property "LCSC Part" "C19110"
+			(at 144.78 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "585a9e6c-85c9-461e-9a90-1edfe6830e52")
 		)
@@ -10578,6 +10864,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 219.71 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C1590"
 			(at 219.71 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -10737,6 +11034,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 210.82 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C1590"
 			(at 210.82 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -11052,6 +11360,17 @@
 			)
 		)
 		(property "Description" ""
+			(at 146.05 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C114409"
 			(at 146.05 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -11505,6 +11824,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 34.29 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part" "C1590"
 			(at 34.29 153.67 0)
 			(hide yes)
 			(show_name no)

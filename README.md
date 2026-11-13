@@ -76,7 +76,7 @@ Analyzing the telemetry revealed the root cause:
 For **Control Board V1.1**, I redesigned the power input stage to handle dynamic regenerative loads:
 * **Wide-Input Buck Converter:** Replaced the 28V-rated TPS54302 with a **TI LMR16030SDDAR**, expanding the maximum input voltage rating to **60V** (providing 36V of transient headroom above the 24V nominal rail).
 * **Transient Voltage Suppression:** Added a **Littelfuse SMBJ26CA** bidirectional TVS diode ($V_{RWM} = 26\text{V}$, $V_C = 42.1\text{V}$) at the power entry to clamp inductive and regenerative voltage spikes well below the LMR16030's 60V limit.
-* **Reverse-Polarity & Bus Hold-Up Filtering:** Added a **B360A (3A, 60V)** series Schottky diode followed by a **100µF electrolytic bulk capacitor** feeding the buck stage to prevent reverse current flow and isolate the logic supply from motor bus voltage dips.
+* **Reverse-Polarity & Bus Hold-Up Filtering:** Added a **SS56 (5A, 60V)** series Schottky diode followed by a **100µF electrolytic bulk capacitor** feeding the buck stage to prevent reverse current flow and isolate the logic supply from motor bus voltage dips.
 
 **Lesson learned:** Never size DC-DC converter voltage ratings based solely on nominal supply voltage in motor-driven systems; always account for regenerative braking energy and 1-quadrant power supply behavior with ample voltage headroom, TVS clamping, and bulk capacitance.
 

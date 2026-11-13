@@ -657,7 +657,7 @@
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -675,7 +675,7 @@
           "group_by": false,
           "label": "Description",
           "name": "Description",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -693,15 +693,15 @@
           "group_by": false,
           "label": "LCSC Part",
           "name": "LCSC Part",
-          "show": false
+          "show": true
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
       "name": "",
-      "sort_asc": true,
-      "sort_field": "Reference"
+      "sort_asc": false,
+      "sort_field": "Footprint"
     },
     "bus_aliases": {},
     "connection_grid_size": 50.0,
@@ -744,7 +744,7 @@
         "uuid": "583cabc8-0b50-417a-9fed-1f5e33be2f52"
       }
     ],
-    "used_designators": "",
+    "used_designators": "#FLG5,#PWR42-48,#PWR69-73,C20-25,C30,D7-9,L1,R7-11,R23,U5",
     "variants": []
   },
   "sheets": [

@@ -2,113 +2,131 @@
   (version 20211014)
   (generator https://github.com/uPesy/easyeda2kicad.py)
 
-  (symbol "TPS54302DDCR_C311983"
+  (symbol "LMR16030SDDAR"
     (in_bom yes)
     (on_board yes)
     (property
       "Reference"
       "U"
       (id 0)
-      (at 0 7.62 0)
+      (at 0 10.16 0)
       (effects (font (size 1.27 1.27) ) )
     )
     (property
       "Value"
-      "TPS54302DDCR_C311983"
+      "LMR16030SDDAR"
       (id 1)
-      (at 0 -7.62 0)
+      (at 0 -10.16 0)
       (effects (font (size 1.27 1.27) ) )
     )
     (property
       "Footprint"
-      "easyeda2kicad:SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL"
+      "easyeda2kicad:SOIC-8_L4.9-W3.9-P1.27-LS6.0-BL-EP2.3"
       (id 2)
-      (at 0 -10.16 0)
+      (at 0 -12.70 0)
       (effects (font (size 1.27 1.27) ) hide)
     )
     (property
       "Datasheet"
-      "https://lcsc.com/product-detail/Others_Texas-Instruments_TPS54302DDCR_Texas-Instruments-TI-TPS54302DDCR_C311983.html"
+      "https://lcsc.com/product-detail/DC-DC-Converters_TI-Tex-as-Instruments_LMR16030SDDAR_TI-Tex-as-Instruments-TI-LMR16030SDDAR_C136648.html"
       (id 3)
-      (at 0 -12.70 0)
+      (at 0 -15.24 0)
       (effects (font (size 1.27 1.27) ) hide)
     )
     (property
       "Manufacturer"
       "TI(德州仪器)"
       (id 4)
-      (at 0 -15.24 0)
-      (effects (font (size 1.27 1.27) ) hide)
-    )
-    (property
-      "MPN"
-      "TPS54302DDCR"
-      (id 5)
       (at 0 -17.78 0)
       (effects (font (size 1.27 1.27) ) hide)
     )
     (property
-      "LCSC Part"
-      "C311983"
-      (id 6)
+      "MPN"
+      "LMR16030SDDAR"
+      (id 5)
       (at 0 -20.32 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C136648"
+      (id 6)
+      (at 0 -22.86 0)
       (effects (font (size 1.27 1.27) ) hide)
     )
     (property
       "ki_keywords"
       "DC-DC Converters"
       (id 8)
-      (at 0 -22.86 0)
+      (at 0 -25.40 0)
       (effects (font (size 1.27 1.27) ) hide)
     )
-    (symbol "TPS54302DDCR_C311983_0_1"
+    (symbol "LMR16030SDDAR_0_1"
       (rectangle
-        (start -10.16 5.08)
-        (end 10.16 -5.08)
+        (start -15.24 7.62)
+        (end 15.24 -7.62)
         (stroke (width 0) (type default))
         (fill (type background))
       )
       (circle
-        (center -8.89 3.81)
+        (center -13.97 6.35)
         (radius 0.38)
         (stroke (width 0) (type default))
         (fill (type none))
       )
       (pin unspecified line
-        (at -12.70 2.54 0)
+        (at -17.78 2.54 0)
         (length 2.54)
-        (name "GND" (effects (font (size 1.27 1.27))))
+        (name "BOOT" (effects (font (size 1.27 1.27))))
         (number "1" (effects (font (size 1.27 1.27))))
       )
       (pin unspecified line
-        (at -12.70 -0.00 0)
+        (at -17.78 -0.00 0)
         (length 2.54)
-        (name "SW" (effects (font (size 1.27 1.27))))
+        (name "VIN" (effects (font (size 1.27 1.27))))
         (number "2" (effects (font (size 1.27 1.27))))
       )
       (pin unspecified line
-        (at -12.70 -2.54 0)
+        (at -17.78 -2.54 0)
         (length 2.54)
-        (name "VIN" (effects (font (size 1.27 1.27))))
+        (name "EN" (effects (font (size 1.27 1.27))))
         (number "3" (effects (font (size 1.27 1.27))))
       )
       (pin unspecified line
-        (at 12.70 -2.54 180)
+        (at -17.78 -5.08 0)
         (length 2.54)
-        (name "FB" (effects (font (size 1.27 1.27))))
+        (name "RT/SYNC" (effects (font (size 1.27 1.27))))
         (number "4" (effects (font (size 1.27 1.27))))
       )
       (pin unspecified line
-        (at 12.70 -0.00 180)
+        (at 17.78 -5.08 180)
         (length 2.54)
-        (name "EN" (effects (font (size 1.27 1.27))))
+        (name "FB" (effects (font (size 1.27 1.27))))
         (number "5" (effects (font (size 1.27 1.27))))
       )
       (pin unspecified line
-        (at 12.70 2.54 180)
+        (at 17.78 -2.54 180)
         (length 2.54)
-        (name "BOOT" (effects (font (size 1.27 1.27))))
+        (name "SSorPGOOD" (effects (font (size 1.27 1.27))))
         (number "6" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 17.78 -0.00 180)
+        (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "7" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 17.78 2.54 180)
+        (length 2.54)
+        (name "SW" (effects (font (size 1.27 1.27))))
+        (number "8" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 17.78 5.08 180)
+        (length 2.54)
+        (name "EP" (effects (font (size 1.27 1.27))))
+        (number "9" (effects (font (size 1.27 1.27))))
       )
     )
   )
