@@ -85,7 +85,7 @@ For **Control Board V1.1**, I redesigned the power input stage to handle dynamic
 The project is currently in active development. Hardware V1.0 bring-up exposed a power stage transient limitation during initial closed-loop tests, and Control Board V1.1 is currently being spun.
 
 - [x] **Phase 1: Hardware & PCB Design**
-  - [x] Schematics (Updated to V1.1 with 60V buck & TVS protection)
+  - [x] Schematics
   - [x] PCB layout
   - [x] Component sourcing
   - [x] PCB soldering/assembly
@@ -97,7 +97,6 @@ The project is currently in active development. Hardware V1.0 bring-up exposed a
   - [x] Validate AS5047P SPI joint encoder (ensure 360° continuous reading).
   - [x] Establish STM32-to-VESC CAN communication.
 - [ ] **Phase 3: System ID & Baseline Control**
-  - [ ] Assemble Control Board V1.1
   - [ ] PID implementation & tuning
   - [ ] System identification 
 - [ ] **Phase 4: Modern Control** (MATLAB simulation, LQR implementation, Energy-based swing-up).
@@ -118,3 +117,4 @@ The project is currently in active development. Hardware V1.0 bring-up exposed a
 | Nov 10 | STM32H7 Firmware configuration done and wrote simple firmware to test SPI encoder, LEDs, and buttons. |
 | Nov 12 | STM32H7 FDCAN communication with VESC working. Velocity and torque/current command with RPM and motor current feedback successful. |
 | Nov 12 | Encountered 24V regenerative braking voltage spike during initial closed-loop PID testing, destroying the V1.0 28V-rated buck converter. Initiated Control Board V1.1 redesign with 60V-rated TI LMR16030 buck, SMBJ26CA TVS diode, B360A Schottky diode, and 100µF bulk cap. |
+| Nov 14 | Control board V1.1 schematic and layout redesigned. PCB ordered. |
