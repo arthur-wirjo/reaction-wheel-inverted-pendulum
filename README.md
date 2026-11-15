@@ -26,7 +26,7 @@ Instead of using off-the-shelf development boards, I designed a custom STM32H7-b
 ### Custom Electronics
 * **Main Control Board (V1.1):** 
   * **MCU:** STM32H743VIT6 (Chosen for extreme computational power required by NMPC).
-  * **Power Management:** Onboard TI LMR16030 (60V-rated 24V-to-5V buck) and ME6211 (5V-to-3.3V LDO), protected by a Littelfuse SMBJ26CA TVS diode, B360A 3A/60V reverse-polarity Schottky diode, and 100µF electrolytic bulk capacitance to safely power the logic alongside regenerative motor loads.
+  * **Power Management:** Onboard TI LMR16030 (60V-rated 24V-to-5V buck) and ME6211 (5V-to-3.3V LDO), protected by a Littelfuse SMBJ26CA TVS diode, SS56 5A/60V reverse-polarity Schottky diode, and 100µF electrolytic bulk capacitance to safely power the logic alongside regenerative motor loads.
   * **Connectivity:** USB-C for telemetry, FDCAN for VESC communication, and SWD (with SEGGER RTT) for real-time debugging.
 * **Modular Encoder Boards:** 
   * Custom 2-layer PCBs housing the AMS AS5047P 14-bit magnetic encoders. 
@@ -116,5 +116,5 @@ The project is currently in active development. Hardware V1.0 bring-up exposed a
 | Nov 8 | VESC FOC torque/current and velocity control via VESC Tool tested. |
 | Nov 10 | STM32H7 Firmware configuration done and wrote simple firmware to test SPI encoder, LEDs, and buttons. |
 | Nov 12 | STM32H7 FDCAN communication with VESC working. Velocity and torque/current command with RPM and motor current feedback successful. |
-| Nov 12 | Encountered 24V regenerative braking voltage spike during initial closed-loop PID testing, destroying the V1.0 28V-rated buck converter. Initiated Control Board V1.1 redesign with 60V-rated TI LMR16030 buck, SMBJ26CA TVS diode, B360A Schottky diode, and 100µF bulk cap. |
+| Nov 12 | Encountered 24V regenerative braking voltage spike during initial closed-loop PID testing, destroying the V1.0 28V-rated buck converter. Initiated Control Board V1.1 redesign with 60V-rated TI LMR16030 buck, SMBJ26CA TVS diode, SS56 Schottky diode, and 100µF bulk cap. |
 | Nov 14 | Control board V1.1 schematic and layout redesigned. PCB ordered. |
