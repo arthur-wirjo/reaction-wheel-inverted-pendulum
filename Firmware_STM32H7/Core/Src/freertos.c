@@ -55,7 +55,7 @@
 // Corrected Angle Register = 0x3FFF and set Bit 14 to 1 (for read) and set Bit 15 to 1 (for even parity bit)
 uint16_t spi1_tx_buf = 0xFFFF; // 0xFFF = 0x3FFF + Read Bit + Even Parity
 uint16_t spi1_rx_buf = 0;
-volatile uint16_t encoder_raw_14bit = 0; // 0 to 15383
+volatile uint16_t encoder_raw_14bit = 0; // 0 to 16383
 volatile int32_t encoder_zero_offset_raw = 0; // 0 deg = down, 180 deg = upright
 volatile float pendulum_angle_deg = 0.0f;
 volatile float upright_error_deg = 0.0f;
@@ -86,32 +86,49 @@ volatile uint32_t vesc_tx_err_cnt = 0; // Stays 0 if CAN bus ACK / wiring is hea
 typedef enum {
   UNCALIBRATED,
   READY,
+  SWING_UP,
   RUNNING
 } RWIP_FSM;
 
 volatile RWIP_FSM RWIP_state = UNCALIBRATED; 
 
-// === Calibration Counter 
+// === Calibration Counter ===
 volatile uint16_t calib_sample_cnt = 0;
-volatile uint32_t calib_accumulator = 0;
+volatile int32_t calib_base_raw = 0;
+volatile int32_t calib_diff_accumulator = 0;
 volatile uint8_t is_calibrating = 0;
 
 // === User Button Edge Detection ===
 volatile uint8_t user_btn_pressed = 0; // button is active low on PB9
 uint8_t user_btn_prev = 0;
 
-// === PID & Wheel Damping Gains
-volatile float Kp = 0.2f; // to be tuned
+// === PID & Wheel Damping Gains ===
+volatile float Kp = 0.8f; // to be tuned
 volatile float Ki = 0.0f; // to be tuned
-volatile float Kd = 0.03f; // to be tuned
-volatile float Kw = 0.0f; // to be tuned, Wheel velocity damping (Amps per Mech RPM)
+volatile float Kd = 0.09f; // to be tuned
+volatile float Kw = 0.0005f; // to be tuned, Wheel velocity damping (Amps per Mech RPM)
 
 volatile float motor_dir = -1.0f; 
 volatile float pid_integral = 0.0f;
 volatile float commanded_current_amps = 0.0f;
 
-#define MAX_CURRENT_AMPS 2.0f
+#define MAX_CURRENT_AMPS 4.5f
 #define SAFETY_CUTOFF_DEG 25.0f
+#define MAX_WHEEL_RPM 4000.0f
+
+// === Energy-Based Swing-Up Variables ===
+volatile float pendulum_energy = 0.0f; // normalized enrgy: 0.0 = down, 2.0 = upright
+volatile float swing_target_energy = 2.3f; // target energy (~2.0)
+volatile float swing_vel_scale_deg_s = 750.0f; // bottom velocity (deg/s) corresponding to E=2.0
+volatile float K_swing = 11.5f; // swing-up pumping gain
+volatile float swing_kick_amps = 2.5f; // initial kick current when starting from dead stop
+volatile float Kw_swing = -0.00001f; // gentle wheel centering during swing-up (must be same sign as Kw)
+volatile uint32_t swing_elapsed_ticks = 0; // safety timeout counter for swing-up
+
+#define MAX_SWING_AMPS 6.5f // safety current limit during swing-up pumping
+#define SWING_CAPTURE_DEG 18.0f // switch FSM from SWING-UP to RUNNING within +/- range
+#define SWING_CAPTURE_VEL_DEG_S 250.0f // only catch if angular velocity is managable
+#define SWING_TIMEOUT_MS 12000 // abort to READY state if swing-up takes longer than 12 seconds
 
 // helper function to check 16-bit even parity from AS5047P
 static inline uint8_t check_even_parity(uint16_t val) {
@@ -227,8 +244,53 @@ void StartControlTask(void *argument)
 
     // Run FSM Control and CAN Output at 200Hz
     if (loop_div % 5 == 0) {
-      if (RWIP_state == RUNNING) {
-        // check if pendulum fall past safety cutoff of +/- 25 deg
+      // Global Wheel Overspeed Safety Check for all active states
+      if ((RWIP_state == SWING_UP || RWIP_state == RUNNING) && (fabsf(vesc_mech_rpm) > MAX_WHEEL_RPM)) {
+        commanded_current_amps = 0.0f;
+        pid_integral = 0.0f;
+        RWIP_state = READY;
+        VESC_Set_Current_Amps(0.0f);
+      }
+      else if (RWIP_state == SWING_UP) {
+        swing_elapsed_ticks += 5; // 200Hz loop = 5ms
+        // check if we reached the upright capture zone
+        if ((fabsf(upright_error_deg) < SWING_CAPTURE_DEG) && (fabsf(pendulum_vel_deg_s) < SWING_CAPTURE_VEL_DEG_S)) {
+          pid_integral = 0.0f;
+          RWIP_state = RUNNING; // hand off to PID+Kw controller
+        }
+        else if (swing_elapsed_ticks > SWING_TIMEOUT_MS) {
+          commanded_current_amps = 0.0f;
+          RWIP_state = READY;
+          VESC_Set_Current_Amps(0.0f);
+        }
+        else { // execute Energy-Shaping Pumping Law
+          float u_amps = 0.0f;
+          // kickstart pulse if hanging motionless at the bottom 
+          if ((swing_elapsed_ticks < 200) && (pendulum_energy < 0.05f) && (fabsf(pendulum_vel_deg_s) < 20.0f)) {
+            u_amps = -motor_dir * swing_kick_amps;
+          } else {
+            // Layapunov Energy Pumping
+            float energy_err = swing_target_energy - pendulum_energy;
+            float smooth_vel_sign = tanhf(pendulum_vel_deg_s / 25.0f);
+            float u_pump = -motor_dir * K_swing * energy_err * smooth_vel_sign;
+
+            u_amps = u_pump + (Kw_swing * vesc_mech_rpm);
+          }
+
+          // clamp current to safe swing-up current limit
+          if (u_amps > MAX_SWING_AMPS) {
+            u_amps = MAX_SWING_AMPS;
+          }
+          if (u_amps < -MAX_SWING_AMPS) {
+            u_amps = -MAX_SWING_AMPS;
+          }
+
+          commanded_current_amps = u_amps;
+          VESC_Set_Current_Amps(u_amps);
+        }
+      }
+      else if (RWIP_state == RUNNING) {
+        // check if pendulum fall past safety cutoff +/-
         if (fabsf(upright_error_deg) > SAFETY_CUTOFF_DEG) {
           commanded_current_amps = 0.0f;
           pid_integral = 0.0f;
@@ -244,14 +306,13 @@ void StartControlTask(void *argument)
             pid_integral = -10.0f;
           }
 
-          // PID control + Wheel velocity damping control law
-          float u_amps = (Kp * upright_error_deg) + 
-                         (Ki * pid_integral) + 
-                         (Kd * pendulum_vel_deg_s) +
-                         (Kw * vesc_mech_rpm);
-          
-          // apply motor direction sign and clamp current
-          u_amps *= motor_dir;
+          // PID Control + Wheel velocity damping
+          float u_pend = motor_dir * ((Kp * upright_error_deg) + 
+                                      (Ki * pid_integral) +
+                                      (Kd * pendulum_vel_deg_s));
+          float u_amps = u_pend + (Kw * vesc_mech_rpm);
+
+          // clamp current to safe limit
           if (u_amps > MAX_CURRENT_AMPS) {
             u_amps = MAX_CURRENT_AMPS;
           }
@@ -262,8 +323,9 @@ void StartControlTask(void *argument)
           commanded_current_amps = u_amps;
           VESC_Set_Current_Amps(u_amps);
         }
-      } else {
-        // RWIP_state in UNCALIBRATED or READY state
+      }
+      else {
+        // UNCALIBRATED or READY state
         commanded_current_amps = 0.0f;
         pid_integral = 0.0f;
         VESC_Set_Current_Amps(0.0f);
@@ -304,22 +366,29 @@ void StartTelemetryTask(void *argument)
         case UNCALIBRATED:
           if (!is_calibrating) {
             SEGGER_RTT_WriteString(0, "Calibrating....\r\n");
-            calib_accumulator = 0;
+            calib_diff_accumulator = 0;
             calib_sample_cnt = 0;
             is_calibrating = 1; 
           }
           break;
         
         case READY:
-          if (fabsf(upright_error_deg) < 15.0f) {
+          if (fabsf(upright_error_deg) < 15.0f) { // user holding pendulum near the top
             pid_integral = 0.0f;
             RWIP_state = RUNNING;
-            SEGGER_RTT_WriteString(0, "Running!!!\r\n");
-          } else {
-            SEGGER_RTT_WriteString(0, "Please move pendulum +/- 15 deg from upright position!\r\n");
+            SEGGER_RTT_WriteString(0, "Direct Balance -> Running!!!\r\n");
+          }  
+          else if (fabsf(upright_error_deg) > 150.0f) { // pendulum is hanging near bottom
+            swing_elapsed_ticks = 0;
+            RWIP_state = SWING_UP;
+            SEGGER_RTT_WriteString(0, "Starting Energy-Based Swing-UP!!!\r\n");
+          }
+          else {
+            SEGGER_RTT_WriteString(0, "READY! Hold upright or let hang at bottom for swing-up\r\n");
           }
           break;
-
+    
+        case SWING_UP:
         case RUNNING:
           RWIP_state = READY;
           SEGGER_RTT_WriteString(0, "Motor Disarming!\r\n");
@@ -334,11 +403,17 @@ void StartTelemetryTask(void *argument)
       case UNCALIBRATED:
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET); // turn off LED
         break;
+
       case READY:
         if (loop_cnt % 5 == 0) { // Blink at 2Hz (toggle every 250ms)
           HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7);
         }
         break;
+
+      case SWING_UP:
+        HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7); // Fast Blink at 10Hz (toggle every 50ms)
+        break;
+
       case RUNNING:
         HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_SET); // turn on LED
         break;
@@ -384,28 +459,50 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi) {
     } else {
       encoder_error_flag = 0;
       encoder_raw_14bit = spi1_rx_buf & 0x3FFF; // mask lower 14 bits
+
+      static int32_t prev_cal_raw = 0;
+      static uint8_t first_sample = 1;
       
-      // handle 200 sample zero calibration
+      // handle 200 sample zero calibration (also wrap-safe)
       if (is_calibrating) {
-        calib_accumulator += encoder_raw_14bit;
+        if (calib_sample_cnt == 0) {
+          calib_base_raw = (int32_t)encoder_raw_14bit;
+        }
+        // signed shortest distance from calib_base_raw [-8192, +8191]
+        int32_t diff = (int32_t)encoder_raw_14bit - calib_base_raw;
+        if (diff > 8192) {
+          diff -= 16384;
+        } else if (diff < -8192) {
+          diff += 16384;
+        }
+        
+        calib_diff_accumulator += diff;
         calib_sample_cnt++;
+
         if (calib_sample_cnt >= 200) {
-          encoder_zero_offset_raw = (int32_t)(calib_accumulator) / (int32_t)(calib_sample_cnt);
+          int32_t avg_diff = calib_diff_accumulator / (int32_t)calib_sample_cnt;
+          encoder_zero_offset_raw = (calib_base_raw + avg_diff) & 0x3FFF;
           is_calibrating = 0;
+          first_sample = 1; // re-seed velocity filter on next line so it doesn't spike
           RWIP_state = READY;
         }
       }
 
-      int32_t cal_raw = ((int32_t)encoder_raw_14bit - encoder_zero_offset_raw);
-      cal_raw = cal_raw & 0x3FFF; // wrap cal_raw (0 to 16383) using & 0x3FFF
+      int32_t cal_raw = ((int32_t)encoder_raw_14bit - encoder_zero_offset_raw) & 0x3FFF;
       pendulum_angle_deg = ((float)cal_raw * 360.0f) / 16384.0f;
 
       // copmute signed upright error
       int32_t err_counts = cal_raw - 8192; // err_counts will be (-8192 to 8192) 
       float new_upright_err_deg = ((float)err_counts * 360.0f) / 16384.0f;
 
+      // prevent startup / post-calibration derivative spike
+      if (first_sample) {
+        prev_cal_raw = cal_raw;
+        pendulum_vel_deg_s = 0.0f;
+        first_sample = 0;
+      }
+
       // compute derivative / velocity (dt = 0.001 at 1kHz) with low pass filter
-      static int32_t prev_cal_raw = 0;
       int32_t delta_counts = cal_raw - prev_cal_raw;
       if (delta_counts > 8192) { // wrap delta_counts (-8192 to 8192)
         delta_counts -= 16384;
@@ -419,6 +516,12 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi) {
       pendulum_vel_deg_s = ((1.0f - alpha) * pendulum_vel_deg_s) + (alpha * raw_vel_deg_s);
 
       upright_error_deg = new_upright_err_deg;
+
+      // Compute normalized mechanical energy (0.0 at bottom, 2.0 at upright)
+      float theta_up_rad = new_upright_err_deg * (3.14159265f / 180.0f);
+      float e_pot = 1.0f + cosf(theta_up_rad);
+      float vel_ratio = pendulum_vel_deg_s / swing_vel_scale_deg_s;
+      pendulum_energy = e_pot + (2.0f * vel_ratio * vel_ratio);
     }
     spi_dma_callback_cnt++;
   }
